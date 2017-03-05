@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?><!-- Use this file to deploy some handlers/chains and services      --><!-- Two ways to do this:                                           --><!--   java org.apache.axis.client.AdminClient deploy.wsdd          --><!--      after the axis server is running                          --><!-- or                                                             --><!--   java org.apache.axis.utils.Admin client|server deploy.wsdd   --><!--      from the same directory that the Axis engine runs         --><deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+
+  <!-- Services from GuitarServiceImplService WSDL service -->
+
+  <service name="GuitarServiceImpl" provider="java:RPC" style="wrapped" use="literal">
+      <parameter name="wsdlTargetNamespace" value="http://service.webservices.igor.com"/>
+      <parameter name="wsdlServiceElement" value="GuitarServiceImplService"/>
+      <parameter name="schemaQualified" value="http://service.webservices.igor.com,http://beans.webservices.igor.com"/>
+      <parameter name="wsdlServicePort" value="GuitarServiceImpl"/>
+      <parameter name="className" value="com.igor.webservices.service.GuitarServiceImpl"/>
+      <parameter name="wsdlPortType" value="GuitarServiceImpl"/>
+      <parameter name="typeMappingVersion" value="1.2"/>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://beans.webservices.igor.com" name="update" qname="operNS:update" returnQName="retNS:updateReturn" returnType="rtns:Guitar" soapAction="">
+        <parameter xmlns:pns="http://service.webservices.igor.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+        <parameter xmlns:pns="http://service.webservices.igor.com" xmlns:tns="http://beans.webservices.igor.com" qname="pns:g" type="tns:Guitar"/>
+      </operation>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="init" qname="operNS:init" returnQName="retNS:initReturn" returnType="rtns:boolean" soapAction="">
+      </operation>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="delete" qname="operNS:delete" returnQName="retNS:deleteReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.webservices.igor.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://beans.webservices.igor.com" name="read" qname="operNS:read" returnQName="retNS:readReturn" returnType="rtns:Guitar" soapAction="">
+        <parameter xmlns:pns="http://service.webservices.igor.com" xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="pns:id" type="tns:int"/>
+      </operation>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="create" qname="operNS:create" returnQName="retNS:createReturn" returnType="rtns:boolean" soapAction="">
+        <parameter xmlns:pns="http://service.webservices.igor.com" xmlns:tns="http://beans.webservices.igor.com" qname="pns:g" type="tns:Guitar"/>
+      </operation>
+      <operation xmlns:operNS="http://service.webservices.igor.com" xmlns:retNS="http://service.webservices.igor.com" xmlns:rtns="http://beans.webservices.igor.com" name="readAll" qname="operNS:readAll" returnQName="retNS:readAllReturn" returnType="rtns:Guitar" soapAction="">
+      </operation>
+      <parameter name="allowedMethods" value="init read update create delete readAll"/>
+
+      <typeMapping xmlns:ns="http://beans.webservices.igor.com" qname="ns:Guitar" type="java:com.igor.webservices.beans.Guitar" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle=""/>
+  </service>
+</deployment>
